@@ -1,0 +1,65 @@
+<?php include 'connection.php'; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="users.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>User Registration</h1>
+    <form id="registrationForm" method="POST">
+        <label for="courtName">Court Name:</label>
+        <input type="text" id="courtName" name="courtName" required><br><br>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="role">Role:</label>
+        <input type="text" id="role" name="role" required><br><br>
+
+
+
+        <input type="submit" name="submit" class="btn1" value="Submit">
+        <input type="submit" name="activate" class="btn3" value="Activate">
+        <input type="submit" name="deactivate" class="btn2" value="Deactivate">
+    </form>
+    <p id="message"></p>
+</div>
+
+<?php
+if (isset($_POST['submit'])) {
+    // Process the form data here
+    $cname = $_POST['courtName'];
+    $uname = $_POST['username'];
+    $pass = $_POST['password'];
+    $role = $_POST['role'];
+
+    // Use prepared statements to prevent SQL injection
+    $query = "INSERT INTO user_details (`Court Name`, `Username`, `Password`, `Role`) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($con, $query);
+    mysqli_stmt_bind_param($stmt, "ssss", $cname, $uname, $pass, $role);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo 'User registered successfully!';
+    } else {
+        echo 'Error: ' . mysqli_error($con);
+    }
+
+    mysqli_stmt_close($stmt);
+}
+
+// Add similar code for "Activate" and "Deactivate" if needed
+?>
+
+</body>
+
+</html>
