@@ -34,6 +34,15 @@ if (! $stmt->prepare($sql)){
 
 $stmt->bind_param("sss", $_POST["courtName"], $_POST["username"], $password_hash );
 
-$stmt->execute();
+if ($stmt->execute()){
+    echo "Signup successful";
+} else {
+    if ($mysqli->errno === 1062){
+        die("Username already taken. Please choose a different username.");
+    } else {
+        die("Execute Error: " . $stmt->error . " (Error code: " . $mysqli->errno . ")");
+    }
+}
 
-echo "Signup successful";
+?>
+
