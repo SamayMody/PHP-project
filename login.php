@@ -16,6 +16,10 @@ $user = $result->fetch_assoc();
 if ($user){
     if (password_verify($_POST["password"], $user["password_hash"])) {
         die("Login Successful");
+
+        $_SESSION["user_id"] = $user["id"];
+        header("Location: index.php");
+        exit;
     }
 }
 
