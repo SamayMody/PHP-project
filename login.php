@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 $mysqli = require __DIR__ . "/database.php";
 $sql = sprintf("SELECT * FROM user
                WHERE username = '%s'" ,
-               $_POST["username"]);
+               $_POST["email"]);
 
 $result = $mysqli->query($sql);
 
@@ -25,45 +25,6 @@ if ($user){
 
 $is_invalid = true;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -93,8 +54,8 @@ $is_invalid = true;
 
 <form method="post">
 
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email">
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password">
