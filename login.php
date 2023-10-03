@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
 $mysqli = require __DIR__ . "/database.php";
 $sql = sprintf("SELECT * FROM user
-               WHERE username = '%s'" ,
+               WHERE email = '%s'" ,
                $_POST["email"]);
 
 $result = $mysqli->query($sql);
@@ -15,7 +15,6 @@ $user = $result->fetch_assoc();
 
 if ($user){
     if (password_verify($_POST["password"], $user["password_hash"])) {
-        die("Login Successful");
 
         $_SESSION["user_id"] = $user["id"];
         header("Location: index.php");
