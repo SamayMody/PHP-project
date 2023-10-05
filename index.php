@@ -31,7 +31,7 @@ if (isset($_SESSION["user_id"])){
 
 
 <?php else: ?>
-<p> <a href="login.php"> Log in </a> or <a href="signup.php"> Sign up </a> </p>
+<p> <a href="login.php"> Log in </a> or <a href="users.html"> Sign up </a> </p>
 
 <?php endif; ?>
 
